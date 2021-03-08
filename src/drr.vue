@@ -477,7 +477,7 @@
         this.cy = stickStartPos.cy + delta.y
 
         if (this.dragHandler)
-          this.setRect(this.dragHandler(this.getRect()))
+          this.setRect(this.dragHandler(this.getRect(), ev))
 
         if (!this.dragStartEmitted) {
           this.$emit('dragstart', this.startRect);
