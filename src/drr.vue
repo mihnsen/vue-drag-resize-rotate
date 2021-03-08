@@ -281,6 +281,7 @@
       document.documentElement.addEventListener('touchmove', this.move, true);
       document.documentElement.addEventListener('touchend touchcancel', this.up, true);
       document.documentElement.addEventListener('touchstart', this.up, true);
+      document.addEventListener('keydown', this.keyboardEvent);
 
       if (this.dragHandle) {
         let dragHandles = Array.prototype.slice.call(this.$el.querySelectorAll(this.dragHandle));
@@ -307,6 +308,7 @@
       document.documentElement.removeEventListener('touchmove', this.move, true);
       document.documentElement.removeEventListener('touchend touchcancel', this.up, true);
       document.documentElement.removeEventListener('touchstart', this.up, true);
+      document.removeEventListener('keydown', this.keyboardEvent);
     },
 
     methods: {
@@ -676,6 +678,53 @@
           this.$emit('rotatestop', this.getRect(), this.startRect);
           this.$emit('change', this.getRect());
         }
+      },
+      keyboardEvent(event) {
+        if (!this.active) {
+          return;
+        }
+
+        let rect = this.getRect();
+
+        switch (event.keyCode) {
+          case 37:
+            rect = {
+              ...rect,
+              x: rect.x - 1,
+            };
+            event.preventDefault();
+            event.stopPropagation();
+            break;
+          case 38:
+            rect = {
+              ...rect,
+              y: rect.y - 1,
+            };
+            event.preventDefault();
+            event.stopPropagation();
+            break;
+          case 39:
+            rect = {
+              ...rect,
+              x: rect.x + 1,
+            };
+            event.preventDefault();
+            event.stopPropagation();
+            break;
+          case 40:
+            rect = {
+              ...rect,
+              y: rect.y + 1,
+            };
+            event.preventDefault();
+            event.stopPropagation();
+            break;
+          default:
+            break;
+        }
+
+        this.setRect(rect)
+        this.$emit('change', this.getRect());
       },
     },
   }
