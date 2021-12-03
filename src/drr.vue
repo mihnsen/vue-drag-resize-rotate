@@ -694,6 +694,7 @@
             };
             event.preventDefault();
             event.stopPropagation();
+            this.arrowMove(rect);
             break;
           case 38:
             rect = {
@@ -702,6 +703,7 @@
             };
             event.preventDefault();
             event.stopPropagation();
+            this.arrowMove(rect);
             break;
           case 39:
             rect = {
@@ -710,6 +712,7 @@
             };
             event.preventDefault();
             event.stopPropagation();
+            this.arrowMove(rect);
             break;
           case 40:
             rect = {
@@ -718,11 +721,14 @@
             };
             event.preventDefault();
             event.stopPropagation();
+            this.arrowMove(rect);
             break;
           default:
             break;
         }
+      },
 
+      arrowMove(rect) {
         this.setRect(rect)
         this.$emit('arrowmove', this.getRect());
       },
