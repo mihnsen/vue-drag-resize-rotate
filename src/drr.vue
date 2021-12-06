@@ -729,8 +729,8 @@
       },
 
       arrowMove(rect) {
-        this.setRect(rect)
-        this.$emit('arrowmove', this.getRect());
+        this.setRect(rect);
+        this.$emit('drag', this.getRect());
       },
     },
   }
