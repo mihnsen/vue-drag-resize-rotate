@@ -122,7 +122,11 @@
       },
       resizeHandler: {
         type: Function
-      }
+      },
+      arrowStep: {
+        type: Number,
+        default: 1,
+      },
     },
 
     data: function () {
@@ -218,45 +222,6 @@
         },
         immediate: true
       },
-
-      x() {
-        if (this.stickDrag || this.bodyDrag)
-          return
-
-        this.cx = this.x
-      },
-
-      y() {
-        if (this.stickDrag || this.bodyDrag)
-          return
-
-        this.cy = this.y
-      },
-
-      w() {
-        if (this.stickDrag || this.bodyDrag)
-          return
-
-        this.currentStick = ['m', 'r'];
-
-        this.width = this.w
-      },
-
-      h() {
-        if (this.stickDrag || this.bodyDrag)
-          return
-
-        this.currentStick = ['b', 'm'];
-
-        this.height = this.h
-      },
-
-      angle() {
-        if (this.stickDrag || this.bodyDrag)
-          return
-
-        this.rotation = this.angle
-      }
     },
 
     created: function () {
@@ -690,7 +655,7 @@
           case 37:
             rect = {
               ...rect,
-              x: rect.x - 1,
+              x: rect.x - this.arrowStep,
             };
             event.preventDefault();
             event.stopPropagation();
@@ -699,7 +664,7 @@
           case 38:
             rect = {
               ...rect,
-              y: rect.y - 1,
+              y: rect.y - this.arrowStep,
             };
             event.preventDefault();
             event.stopPropagation();
@@ -708,7 +673,7 @@
           case 39:
             rect = {
               ...rect,
-              x: rect.x + 1,
+              x: rect.x + this.arrowStep,
             };
             event.preventDefault();
             event.stopPropagation();
@@ -717,7 +682,7 @@
           case 40:
             rect = {
               ...rect,
-              y: rect.y + 1,
+              y: rect.y + this.arrowStep,
             };
             event.preventDefault();
             event.stopPropagation();
@@ -730,7 +695,7 @@
 
       arrowMove(rect) {
         this.setRect(rect);
-        this.$emit('drag', this.getRect());
+        this.$emit('drag', rect);
       },
     },
   }
