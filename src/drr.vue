@@ -696,6 +696,7 @@
       arrowMove(rect) {
         this.setRect(rect);
         this.$emit('drag', rect);
+        this.$emit('dragstop', rect);
       },
     },
   }
