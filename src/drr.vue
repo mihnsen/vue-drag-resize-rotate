@@ -202,11 +202,9 @@
         else
           this.$emit('deselect');
       },
-
       selected(val) {
         this.active = val
       },
-
       hasActiveContent: {
         handler: function(val) {
           if (val) {
@@ -222,6 +220,33 @@
         },
         immediate: true
       },
+      x() {
+        if (this.stickDrag || this.bodyDrag)
+          return
+        this.cx = this.x
+      },
+      y() {
+        if (this.stickDrag || this.bodyDrag)
+          return
+        this.cy = this.y
+      },
+      w() {
+        if (this.stickDrag || this.bodyDrag)
+          return
+        this.currentStick = ['m', 'r'];
+        this.width = this.w
+      },
+      h() {
+        if (this.stickDrag || this.bodyDrag)
+          return
+        this.currentStick = ['b', 'm'];
+        this.height = this.h
+      },
+      angle() {
+        if (this.stickDrag || this.bodyDrag)
+          return
+        this.rotation = this.angle
+      }
     },
 
     created: function () {
